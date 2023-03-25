@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 export type PostTagDocument = HydratedDocument<PostTag>;
 
-@Schema()
+@Schema({versionKey: false, timestamps: true})
 export class PostTag {
   @Prop()
   tag_id: string;

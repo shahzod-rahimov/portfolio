@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreatePostTagDto } from './dto/create-post_tag.dto';
 import { UpdatePostTagDto } from './dto/update-post_tag.dto';
+import { PostTag, PostTagDocument } from './entities/post_tag.entity';
 
 @Injectable()
 export class PostTagsService {
+  constructor(
+    @InjectModel(PostTag.name) private postTagModel: Model<PostTagDocument>,
+  ) {}
   create(createPostTagDto: CreatePostTagDto) {
-    return 'This action adds a new postTag';
+    return this.postTagModel.create(createPostTagDto);
   }
 
   findAll() {
-    return `This action returns all postTags`;
+    return this.postTagModel.find({});
   }
 
   findOne(id: number) {

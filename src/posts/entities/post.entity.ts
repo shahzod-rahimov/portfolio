@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 export type PostDocument = HydratedDocument<Post>;
 
-@Schema()
+@Schema({ versionKey: false, timestamps: true })
 export class Post {
   @Prop()
   title: string;

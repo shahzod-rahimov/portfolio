@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 export type SocialDocument = HydratedDocument<Social>;
 
-@Schema()
+@Schema({ versionKey: false, timestamps: true })
 export class Social {
   @Prop()
   name: string;
