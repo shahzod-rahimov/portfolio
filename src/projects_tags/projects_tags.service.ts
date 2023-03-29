@@ -1,26 +1,60 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateProjectsTagDto } from './dto/create-projects_tag.dto';
 import { UpdateProjectsTagDto } from './dto/update-projects_tag.dto';
+import {
+  ProjectsTag,
+  ProjectsTagDocument,
+} from './entities/projects_tag.entity';
 
 @Injectable()
 export class ProjectsTagsService {
+  constructor(
+    @InjectModel(ProjectsTag.name)
+    private projectTagModel: Model<ProjectsTagDocument>,
+  ) {}
   create(createProjectsTagDto: CreateProjectsTagDto) {
-    return 'This action adds a new projectsTag';
+    return this.projectTagModel.create(createProjectsTagDto);
   }
 
   findAll() {
-    return `This action returns all projectsTags`;
+    return this.projectTagModel.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} projectsTag`;
+  async findOne(id: string) {
+    const projectTag = await this.projectTagModel.findById(id);
+
+    if (!projectTag) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return projectTag;
   }
 
-  update(id: number, updateProjectsTagDto: UpdateProjectsTagDto) {
-    return `This action updates a #${id} projectsTag`;
+  async update(id: string, updateProjectsTagDto: UpdateProjectsTagDto) {
+    const updatedetData = await this.projectTagModel.findByIdAndUpdate(
+      id,
+      updateProjectsTagDto,
+      {
+        new: true,
+      },
+    );
+
+    if (!updatedetData) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return updatedetData;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} projectsTag`;
+  async remove(id: string) {
+    const projectTag = await this.projectTagModel.findByIdAndRemove(id);
+
+    if (!projectTag) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return projectTag;
   }
 }

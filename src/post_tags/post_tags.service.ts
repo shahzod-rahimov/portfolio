@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreatePostTagDto } from './dto/create-post_tag.dto';
@@ -10,6 +10,7 @@ export class PostTagsService {
   constructor(
     @InjectModel(PostTag.name) private postTagModel: Model<PostTagDocument>,
   ) {}
+  
   create(createPostTagDto: CreatePostTagDto) {
     return this.postTagModel.create(createPostTagDto);
   }
@@ -18,15 +19,37 @@ export class PostTagsService {
     return this.postTagModel.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} postTag`;
+  async findOne(id: string) {
+    const postTag = await this.postTagModel.findById(id);
+
+    if (!postTag) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return postTag;
   }
 
-  update(id: number, updatePostTagDto: UpdatePostTagDto) {
-    return `This action updates a #${id} postTag`;
+  async update(id: string, updatePostTagDto: UpdatePostTagDto) {
+    const postTag = await this.postTagModel.findByIdAndUpdate(
+      id,
+      updatePostTagDto,
+      { new: true },
+    );
+
+    if (!postTag) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return postTag;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} postTag`;
+  async remove(id: string) {
+    const postTag = await this.postTagModel.findByIdAndRemove(id);
+
+    if (!postTag) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return postTag;
   }
 }

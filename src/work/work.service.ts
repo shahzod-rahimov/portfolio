@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateWorkDto } from './dto/create-work.dto';
 import { UpdateWorkDto } from './dto/update-work.dto';
+import { Work, WorkDocument } from './entities/work.entity';
 
 @Injectable()
 export class WorkService {
+  constructor(@InjectModel(Work.name) private workModel: Model<WorkDocument>) {}
+
   create(createWorkDto: CreateWorkDto) {
-    return 'This action adds a new work';
+    return this.workModel.create(createWorkDto);
   }
 
   findAll() {
-    return `This action returns all work`;
+    return this.workModel.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} work`;
+  async findOne(id: string) {
+    const work = await this.workModel.findById(id);
+
+    if (!work) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return work;
   }
 
-  update(id: number, updateWorkDto: UpdateWorkDto) {
-    return `This action updates a #${id} work`;
+  async update(id: string, updateworkDto: UpdateWorkDto) {
+    const work = await this.workModel.findByIdAndUpdate(id, updateworkDto, {
+      new: true,
+    });
+
+    if (!work) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return work;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} work`;
+  async remove(id: string) {
+    const work = await this.workModel.findByIdAndRemove(id);
+
+    if (!work) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return work;
   }
 }

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ProjectsTagsService } from './projects_tags.service';
 import { CreateProjectsTagDto } from './dto/create-projects_tag.dto';
 import { UpdateProjectsTagDto } from './dto/update-projects_tag.dto';
@@ -19,16 +27,19 @@ export class ProjectsTagsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.projectsTagsService.findOne(+id);
+    return this.projectsTagsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProjectsTagDto: UpdateProjectsTagDto) {
-    return this.projectsTagsService.update(+id, updateProjectsTagDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateProjectsTagDto: UpdateProjectsTagDto,
+  ) {
+    return this.projectsTagsService.update(id, updateProjectsTagDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.projectsTagsService.remove(+id);
+    return this.projectsTagsService.remove(id);
   }
 }

@@ -1,26 +1,50 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User, UserDocument } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    return this.userModel.create(createUserDto);
   }
 
   findAll() {
-    return `This action returns all user`;
+    return this.userModel.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const user = await this.userModel.findById(id);
+
+    if (!user) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.userModel.findByIdAndUpdate(id, updateUserDto, {
+      new: true,
+    });
+
+    if (!user) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return user;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const user = await this.userModel.findByIdAndRemove(id);
+
+    if (!user) {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    return user;
   }
 }
