@@ -1,15 +1,32 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { FilesService } from '../file/file.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
-  create(createUserDto: CreateUserDto) {
-    return this.userModel.create(createUserDto);
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private readonly fileService: FilesService,
+  ) {}
+
+  async create(createUserDto: CreateUserDto, files: any) {
+    const { cv, photo } = files;
+    const res = await Promise.all([
+      this.fileService.createFile(cv[0]),
+      this.fileService.createFile(photo[0]),
+    ]).then((res) => res);
+
+    const user = await this.userModel.create({
+      ...createUserDto,
+      cv_link: res[0],
+      photo: res[1],
+    });
+
+    return user;
   }
 
   findAll() {

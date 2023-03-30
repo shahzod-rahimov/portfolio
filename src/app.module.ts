@@ -9,6 +9,10 @@ import { PostsModule } from './posts/posts.module';
 import { SocialsModule } from './socials/socials.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { FileModule } from './file/file.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { resolve } from 'path';
+import { DownloadModule } from './download/download.module';
 
 @Module({
   imports: [
@@ -16,6 +20,11 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: `.env`,
       isGlobal: true,
     }),
+
+    ServeStaticModule.forRoot({
+      rootPath: resolve(__dirname, 'static'),
+    }),
+
     MongooseModule.forRoot(process.env.MONGO_URL),
     UserModule,
     WorkModule,
@@ -25,6 +34,8 @@ import { ConfigModule } from '@nestjs/config';
     PostTagsModule,
     PostsModule,
     SocialsModule,
+    FileModule,
+    DownloadModule,
   ],
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsPhoneNumber, IsString } from 'class-validator';
+import { IsDateString, IsPhoneNumber, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -12,12 +12,6 @@ export class CreateUserDto {
 
   @IsPhoneNumber('UZ')
   readonly phone_number: string;
-
-  @IsString()
-  readonly photo: string;
-
-  @IsString()
-  readonly cv_link: string;
 
   @IsDateString()
   readonly birth_date: Date;
