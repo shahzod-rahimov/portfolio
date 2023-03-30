@@ -12,7 +12,6 @@ import { ConfigModule } from '@nestjs/config';
 import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { resolve } from 'path';
-import { DownloadModule } from './download/download.module';
 
 @Module({
   imports: [
@@ -35,7 +34,6 @@ import { DownloadModule } from './download/download.module';
     PostsModule,
     SocialsModule,
     FileModule,
-    DownloadModule,
   ],
 })
 export class AppModule {}
