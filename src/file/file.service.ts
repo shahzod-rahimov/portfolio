@@ -24,4 +24,11 @@ export class FilesService {
       );
     }
   }
+
+  fileStream(fileName: string) {
+    const filePath = path.join(__dirname, '..', `static/${fileName}`);
+
+    if (fs.existsSync(filePath)) return fs.createReadStream(filePath);
+    else throw new HttpException('File Not Found', HttpStatus.NOT_FOUND);
+  }
 }
