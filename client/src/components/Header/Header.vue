@@ -15,8 +15,8 @@
               >
             </li>
             <li>
-              <router-link to="/portfolio" class="hover:text-white active:font-medium"
-                ><span class="text-[#C778DD]">#</span>portfolio</router-link
+              <router-link to="/works" class="hover:text-white active:font-medium"
+                ><span class="text-[#C778DD]">#</span>works</router-link
               >
             </li>
             <li>
