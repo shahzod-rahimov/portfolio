@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  font-family: 'Fira Code', monospace;;
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  background-color: #282C33;
+}
+
+body {
+  font-family: 'Fira Code', monospace;
 }

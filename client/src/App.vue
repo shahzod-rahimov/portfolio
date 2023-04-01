@@ -3,7 +3,7 @@ import MainApp from './layout/MainApp.vue'
 </script>
 
 <template>
-  <div class="bg-[#282C33]">
+  <div>
     <MainApp />
   </div>
 </template>

@@ -15,19 +15,19 @@
               >
             </li>
             <li>
+              <a href="#about" class="hover:text-white active:font-medium">
+                <span class="text-[#C778DD]">#</span>about-me
+              </a>
+            </li>
+            <li>
               <router-link to="/works" class="hover:text-white active:font-medium"
                 ><span class="text-[#C778DD]">#</span>works</router-link
               >
             </li>
             <li>
-              <router-link to="/about" class="hover:text-white active:font-medium">
-                <span class="text-[#C778DD]">#</span>about-me</router-link
+              <router-link to="/blog" class="hover:text-white active:font-medium">
+                <span class="text-[#C778DD]">#</span>blog</router-link
               >
-            </li>
-            <li>
-              <router-link to="contact" class="hover:text-white active:font-medium">
-                <span class="text-[#C778DD]">#</span>contacts
-              </router-link>
             </li>
           </ul>
         </nav>

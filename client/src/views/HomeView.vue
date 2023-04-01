@@ -6,17 +6,17 @@
       <div class="flex items-center mt-[62px]">
         <div class="flex flex-col gap-8 items-start w-[50%]">
           <h1 class="text-[32px] text-white font-semibold">
-            Shahzod is a <span class="text-[#C778DD]">back-end</span> and
-            <span class="text-[#C778DD]">front-end developer</span>
+            Shahzod is a
+            <span class="text-[#C778DD]">full stack web developer</span>
           </h1>
           <p class="text-[#ABB2BF] w-[90%]">
-            He crafts responsive websites where technologies meet creativity
+            Full stack web developer with expertise in NodeJs and VueJs.
           </p>
           <div class="flex gap-2">
-            <router-link
-              to="/contact"
+            <a
+              href="#contacts"
               class="border border-[#C778DD] text-white px-4 font-semibold flex items-center hover:bg-[#c778dd33]"
-              >Contact me!!</router-link
+              >Contact me!!</a
             >
             <button
               class="cv text-white py-2 px-4 font-semibold flex items-center gap-2 border border-[#C778DD] hover:bg-[#c778dd33]"
@@ -136,7 +136,7 @@
           <LogoOutline class="w-[113px] absolute bottom-0 left-4" />
         </div>
 
-        <div class="right-side flex items-start gap-4 w-[60%] mt-[45px] text-[#ABB2BF]">
+        <div class="right-side flex items-start gap-4 w-[60%] mt-[30px] text-[#ABB2BF]">
           <div class="border border-[#ABB2BF]">
             <p class="border-b border-[#ABB2BF] p-2 font-semibold text-white">Languages</p>
             <p class="p-2">Node.js JavaScript TypeScript C Python</p>
@@ -176,12 +176,100 @@
     </div>
   </section>
   <!-- finish skills -->
+
+  <!-- start about me -->
+  <section id="about" class="text-[#ABB2BF] mt-[112px]">
+    <div class="container mx-auto">
+      <div class="flex items-center gap-4">
+        <h1 class="text-white text-[32px] font-medium">
+          <span class="text-[#C778DD]">#</span>about-me
+        </h1>
+        <div class="bg-[#C778DD] h-[1px] w-[30%]"></div>
+      </div>
+
+      <div class="flex gap-[170px]">
+        <div class="about-me__left-side w-[60%]">
+          <div class="flex flex-col gap-4 mt-6">
+            <p>
+              Hi there! I'm Shahzod, a full stack web developer with expertise in NodeJs and VueJs.
+            </p>
+            <p>
+              With a strong background in computer science, I possess extensive knowledge and
+              experience in building scalable and performant web applications. I am skilled in a
+              variety of programming languages, including JavaScript, HTML, and CSS, and I have
+              experience working with various web development frameworks and libraries, such as
+              Vue.js, Node.js, and Express.
+            </p>
+            <p>
+              Throughout my career, I have been dedicated to delivering high-quality solutions that
+              exceed expectations. I am committed to staying up-to-date with the latest technologies
+              and trends in the industry, and I am always looking for ways to improve my skills and
+              expertise.
+            </p>
+          </div>
+          <button
+            class="border border-[#C778DD] mt-7 text-white py-2 px-4 font-medium hover:bg-[#c778dd33]"
+          >
+            <router-link to="/about">Read more -></router-link>
+          </button>
+        </div>
+        <div class="about-me__right-side w-[40%] relative -mt-10">
+          <Dots class="absolute top-14" />
+          <div class="flex flex-col items-center">
+            <img :src="DarkManAboutMe" alt="" />
+            <div class="w-[75%] h-[1px] bg-[#C778DD]"></div>
+          </div>
+          <DotsHorizontal class="absolute right-8 bottom-[150px]" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- finish about me -->
+
+  <!-- start contact -->
+  <section id="contacts" class="text-[#ABB2BF] mt-[112px]">
+    <div class="container mx-auto">
+      <div class="flex items-center gap-4">
+        <h1 class="text-white text-[32px] font-medium">
+          <span class="text-[#C778DD]">#</span>contacts
+        </h1>
+        <div class="bg-[#C778DD] h-[1px] w-[15%]"></div>
+      </div>
+
+      <div class="flex gap-[300px] mt-[45px]">
+        <p>
+          I'm interested in freelance opportunities. However, if you have other request or question,
+          don't hesitate to contact me
+        </p>
+
+        <div class="flex flex-col gap-4 border border-[#ABB2BF] w-[270px] p-4">
+          <h2 class="font-semibold text-white">Message me here</h2>
+          <div class="flex gap-1 items-center ml-1">
+            <span
+              class="w-[23px] h-[23px] rounded-full bg-[#ABB2BF] flex items-center justify-center"
+            >
+              <i class="bx bxl-telegram text-[#282C33]"></i>
+            </span>
+            <a href="https://t.me/shahzodrahimov21" target="_blank">shahzodrahimov21</a>
+          </div>
+          <div class="flex items-center">
+            <Email />
+            <p>shahzod3235@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- finish contact -->
 </template>
 
 <script setup>
 import LogoOutline from '../components/icons/logo-outline.vue'
 import Dots from '../components/icons/Dots.vue'
+import Email from '../components/icons/Email.vue'
+import DotsHorizontal from '../components/icons/dots-gor.vue'
 import DarkMan from '../images/Image.png'
+import DarkManAboutMe from '../images/man-dark.png'
 import Mark from '../components/icons/Mark.vue'
 import ChartNodes from '../images/chertNodes.jpg'
 import ProtectX from '../images/protectx.jpg'
